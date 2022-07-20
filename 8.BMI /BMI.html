@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI計算機</title>
+    <link rel="stylesheet" href="./BMI.css">
+</head>
+<body>
+    <div class="container">
+        <h1>BMI計算機</h1>
+        <p>身體質量指數(Body Mass Index,簡稱BMI)是公認用來估計肥胖程度的方法</p>
+        <p>BMI=體重（公斤）/身高的平方（公尺）</p>
+        <div id="main">
+            
+        <label for="height">我的身高：</label>
+        <input id="height" type="number" placeholder="請輸入公尺"  >公尺
+        <label for="weight">我的體重：</label>
+        <input id="weight" type="number" placeholder="請輸入公分" min="20.00" max="180.00">公斤
+        <button id="calc">計算</button>
+        <button id="reset">重新填寫</button>
+   
+        </div>
+        <br>
+        <div id="result"></div> 
+        <br>
+        <table>
+             <tr><th colspan="3">BMI值</th></tr>
+            <tr>
+                <td></td>
+                <td>男性</td>
+                <td>女性</td>
+            </tr>
+            <tr><td>體重過輕</td>
+                <td><20</td>
+                <td><19</td>
+            </tr>
+            <tr><td>正常範圍</td>
+                <td>20-25</td>
+                <td>19-25</td>
+            </tr>
+            <tr><td>體重過輕</td>
+                <td>25-30</td>
+                <td>25-30</td>
+            </tr>
+            <tr><td>肥胖</td>
+                <td>30-40</td>
+                <td>30-40</td>
+            </tr>
+            <tr><td>病態肥胖</td>
+                <td>>40</td>
+                <td>>40</td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        var weight = document.querySelector('#weight');
+        var height = document.querySelector('#height');
+        var calc = document.querySelector('#calc');
+        var reset = document.querySelector('#reset')
+        var result = document.querySelector('#result')
+
+        console.log(weight,height,calc,reset,result);
+        
+        //老師的寫法
+        //calc.addEventListener("click"(){
+             // 當沒東西存在時，期值為null，null就是空的意思。
+            //let x = null 
+            //console.log('x=>,x=='')
+
+            //var height = height.value;
+            //var weight = weight.value;
+
+            //!height =不存在height  ；!weight =不存在weight
+            //if(!height || !weight){
+                //alert('請輸入身高及體重!');return
+            
+            //let sum = weight / ((height /100)**2);
+            //result.innerHTML = sum.toFixed(2);
+
+    
+
+        calc.addEventListener('click',function(){
+            var sum =(weight.value * 1 / height.value* 1 );
+            
+            var fatter='';
+
+        if(sum >= 40){fatter='病態肥胖';}
+        else if(sum >= 30){fatter='肥胖';}
+        else if(sum >= 25){fatter='體重過輕';}
+        else if(sum >= 20){rfatter='正常範圍';}
+        else{fatter='體重過輕';}
+
+        result.innerHTML = sum.toFixed(2)+','+fatter;
+        })
+
+    // 清空表格內容
+        reset.addEventListener('click',function(){
+        var sum='';
+        result.innerHTML = "";
+        weight.value="";
+        height.value="";
+
+         })
+
+        // var weight = document.getElementById("#weight") ;
+        // var height = document.getElementById("#height") 
+
+        // var reset = document.getElementById("#reset") 
+
+        // function reset{
+        //     var str = "";
+
+
+
+    </script>
+ 
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+            box-sizing: border-box;
+            font-family: 'Segoe UI','Microsoft JhengHei',"Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: #303841;
+        }
+        .box{
+            margin: 0 auto;
+            width: 800px;
+            height: 600px;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .dice{
+            width: 250px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .start{
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            background-color: rgb(214, 214, 95);
+            font-size: 50px;
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%);
+        }
+        .box2{
+            display: flex;
+            width: 800px;
+            height: 500px;
+            background-color: wheat;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .result{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            font-size: 30px;
+            width: calc(100% / 3);
+            margin: 0 auto;
+            }
+</style>
+<body>
+    <div class="box">
+        <div class="dice"><img id="dice_imgF" src="./img/1.png" width="200px" height="200px" alt=""></div>
+        <div class="dice"><img id="dice_imgS" src="./img/1.png" width="200px" height="200px" alt=""></div>
+        <div class="dice"><img id="dice_imgT" src="./img/1.png" width="200px" height="200px" alt=""></div>
+        <div class="box2">
+            <div class="result"></div>
+        </div>
+    </div>
+    <button class="start">Start</button>
+
+    <script>
+        let Bdice = document.querySelectorAll('.dice')
+        let Dice = document.querySelector('#dice_imgF')
+        let DiceS = document.querySelector('#dice_imgS')
+        let DiceT = document.querySelector('#dice_imgT')
+        let Sbtn = document.querySelector('.start')
+        let Res = document.querySelector('.result')
+
+        Sbtn.addEventListener('click',function(){
+            i= 0;
+            Res.innerHTML = ""
+            do{
+                i++
+                if(i==10){
+                    break
+                }
+                roll = Math.floor(Math.random()*6)+1;
+                console.log(roll);
+                rollS = Math.floor(Math.random()*6)+1;
+                console.log(rollS);
+                rollT = Math.floor(Math.random()*6)+1;
+                console.log(rollT);
+                
+                Dice.src= `./img/${roll}.png`;
+                // console.log(Dice);
+                DiceS.src= `./img/${rollS}.png`;
+                // console.log(DiceS);
+                DiceT.src= `./img/${rollT}.png`;
+                // console.log(DiceT);
+                console.log("第"+i+"次");
+                Res.innerHTML += `<div class="result">${roll}</div>` +`<div class="result">${rollS}</div>` +`<div class="result">${rollT}</div>`;
+            }while(Dice.src != DiceS.src || Dice.src != DiceT.src || DiceS.src != DiceT.src)
+        })
+    </script>
+</body>
+</html>

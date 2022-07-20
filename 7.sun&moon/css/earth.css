@@ -1,0 +1,205 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
+*{
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+body{
+    padding: 0;
+    margin:0;
+    /* 地球及月球轉動時，到畫面下方會有白色溢出情形 */
+    /* 超過父層時隱藏 */
+     overflow:hidden; 
+     
+
+}
+
+.universe{
+  width: 100vw;
+  height: 100vh;
+  /* 中心灰色，旁邊黑色 */
+  background-image: -o-radial-gradient(#555, #000);
+  background-image: radial-gradient(#555, #000);
+  
+  display: -ms-grid;
+  
+  display: grid;
+  place-items: center;
+
+
+}
+
+.stars{
+    width: 100vw;
+    height: 100vh;
+    /* 縮放圖片直到覆蓋整個div，圖片不會有重複情形 */
+    background-size: cover;
+    /* 圖片置中 */
+    background-position: center center;
+    /* 動畫效果：定義名稱   秒數   無限    反覆運作 */
+    -webkit-animation: star-pulse 2s infinite alternate;
+            animation: star-pulse 2s infinite alternate; 
+    position: absolute;
+}
+/* 以透明度控制星星閃爍 */
+ @-webkit-keyframes star-pulse{
+    100%{
+        opacity: .4;
+    }
+}
+ @keyframes star-pulse{
+    100%{
+        opacity: .4;
+    }
+} 
+
+.sun{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    /* 中心黃色，旁邊橘色 */
+    background-image: -o-radial-gradient(yellow,orange);
+    background-image: radial-gradient(yellow,orange);
+    /* 設定邊框陰影 */
+          /* Ｘ軸 Ｙ軸 模糊程度 呈現範圍 顏色 */
+    -webkit-box-shadow: 0 0  80px 10px yellow;
+            box-shadow: 0 0  80px 10px yellow;
+    /* 將太陽定位在星星圖片中央 */
+    /* position: absolute; */
+    /* 視寬/視高一半剪掉太陽大小一半，置中 */
+    /* left:calc(100vw / 2 - 200px / 2 );
+    top: calc(100vh / 2 - 200px / 2);   */
+    /* 動畫效果：太陽陰影變大 */
+     -webkit-animation: sun-fire 2s infinite alternate;
+             animation: sun-fire 2s infinite alternate;  
+}
+
+ @-webkit-keyframes sun-fire{
+    100%{
+        -webkit-box-shadow: 0 0 80px 50px yellow;
+                box-shadow: 0 0 80px 50px yellow; 
+    }
+}
+
+ @keyframes sun-fire{
+    100%{
+        -webkit-box-shadow: 0 0 80px 50px yellow;
+                box-shadow: 0 0 80px 50px yellow; 
+    }
+} 
+
+/* 地球軌跡 */
+.earth-orbit{
+    width: 90vh;
+    height: 90vh;
+    border-radius: 50%;
+    /* border: 2px dashed gold; */
+
+    display: -ms-grid;
+
+    display: grid;
+    place-items: center;
+
+    /* 將地球軌跡定位在星星圖片置中 */
+    /* position: absolute;
+    left: calc(100vw / 2 - 90vh / 2 );
+    top: calc(100vh / 2 - 90vh / 2);  */
+    /* 動畫效果：          等速率   無限循環 */
+    -webkit-animation: spin  30s linear infinite;
+            animation: spin  30s linear infinite;  
+} 
+
+ @-webkit-keyframes spin{
+    100%{
+         /* 轉變：旋轉 360度  */
+        -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+    }
+} 
+
+ @keyframes spin{
+    100%{
+         /* 轉變：旋轉 360度  */
+        -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+    }
+} 
+
+/* 月亮軌跡 */
+.moon-orbit{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    /* border: 2px dashed gold; */
+
+    position: absolute;
+    left:calc(-120px / 2 );
+    top:calc(50% - 120px / 2); 
+    
+    display: -ms-grid; 
+    
+    display: grid;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;  
+    /* animation: spin 30s linear infinite;  */
+
+}
+/* @keyframes spin{
+    100%{
+         轉變：旋轉 360度 
+        transform: rotate(360deg);
+    }
+} */
+
+.earth{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    -webkit-animation: dontspin 30s linear infinite;
+            animation: dontspin 30s linear infinite;  
+
+}
+
+@-webkit-keyframes dontspin{
+    100%{
+        -webkit-transform: rotate(-720deg);
+                transform: rotate(-720deg);
+    }
+
+}
+
+@keyframes dontspin{
+    100%{
+        -webkit-transform: rotate(-720deg);
+                transform: rotate(-720deg);
+    }
+
+} 
+
+.earth img{
+    width: 80px;
+}
+
+.moon{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-image: -o-radial-gradient(white, skyblue);
+    background-image: radial-gradient(white, skyblue);
+     position:absolute;
+    left:calc(-30px / 2);
+    top:calc(50% - 30px / 2); 
+}
+
+
+

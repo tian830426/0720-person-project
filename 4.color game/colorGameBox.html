@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: rgb(31, 94, 131);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      #point,
+      #test,
+      #level {
+        border-radius: 10%;
+        font-size: 50px;
+        /* 無法選取其文字 預設為：text /點擊全選為：all */
+        user-select: none;
+        text-align: center;
+        position: absolute;
+      }
+
+      #point {
+        top: 25%;
+        left: 3%;
+      }
+
+      #test {
+        top: 35%;
+        left: 4%;
+        background-color: rgb(238, 192, 192);
+      }
+
+      #level {
+        top: 15%;
+        left: 45%;
+        transform: translate(-50%);
+      }
+      .boxes {
+        width: 400px;
+        height: 400px;
+        background-color: #fff;
+        border-radius: 5%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .box {
+        width: 50%;
+        height: 50%;
+        background-color: rgb(145, 226, 221);
+        border: 5px white solid;
+        border-radius: 10px;
+      }
+
+      .answer-box {
+        opacity: 0.5;
+      }
+
+      .time-area {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 10px;
+        font-size: 30px;
+        letter-spacing: 3px;
+        background-color: #7dc38e;
+        left: 45%;
+        transform: translate(-50%);
+        top: 7%;
+      }
+      .time-area div {
+        padding: 5px;
+      }
+      .start-btn {
+        background-color: #c5edd0;
+        left: 4%;
+        border-radius: 10px;
+        top: 45%;
+        width: 120px;
+        height: 80px;
+        font-size: 50px;
+        font-weight: 500;
+      }
+      .start-btn,
+      .time-area {
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="boxes"></div>
+    <div id="level">Level:1</div>
+    <div id="point">Point:0</div>
+    <div id="test">提示</div>
+    <div class="time-area">
+      Time:
+      <div class="time">10</div>
+      S
+    </div>
+    <button class="start-btn btn">Play</button>
+
+    <!-- //任務
+        //Level 1:過第一關
+        //Level 2:過第二關
+        //Level 3:過第三關
+        //Level 4:一直玩下去,至少玩10關
+        //Level 5:非常完整(不包含程式碼完美) -->
+    <script>
+      // 設定倒數的秒數
+      let time = 10;
+      let timeSub = document.querySelector(".time");
+      let start = document.querySelector(".start-btn");
+
+      start.addEventListener("click", function () {
+        game();
+        setInterval(function () {
+          if (time == 0) {
+            alert("Game Over");
+            time = 10;
+            // 頁面自動刷新語法
+            parent.location.reload();
+          } else {
+            time--;
+            timeSub.innerHTML = time;
+          }
+        }, 1000);
+      });
+      const a = 256;
+      let level = 1;
+      let size;
+      let color;
+      let answer;
+      let p = 0 //定義point的起始值
+      let n = 2 //定義level的起始值
+      let boxAll = document.querySelector(".boxes");
+
+      game();
+      function game() {
+        // level++; 0+1...
+        n++;
+        let size = 100 / n; //每一關的寬高定義
+        let color = `rgb(${Math.floor(Math.random() * a)},${Math.floor(
+          Math.random() * a
+        )},${Math.floor(Math.random() * a)})`;
+
+        answer = Math.floor(Math.random() * level ** 2);
+        //隨機出答案
+
+        boxAll.innerHTML = ""; //清空
+
+        for (let i = 0; i < n** 2; i++) {
+          boxAll.innerHTML += `<div class = 'box' style =' width:${size}%; height:${size}%;background-color:${color};'></div>`;
+        }
+
+        boxSmallAll = document.querySelectorAll(".box");
+        //設置答案盒子
+
+        boxSmallAll[answer].classList.add("answer-box"); //將.answer-box加入 原來class
+        //變更opacity,使難度增加
+        boxSmallAll[answer].style.opacity = `${0.5 + n * 0.01}`;
+        //找答案盒子
+        let answerBox = document.querySelector(".answer-box");
+
+        answerBox.addEventListener("click", function () {
+          //將答案盒子設置監聽事件 =>如果被按了就會知道答案
+          alert("我是答案 ! ");
+
+          answerBox.addEventListener('click',function(){
+              let oscore = document.querySelector('#point');
+              let olevel = document.querySelector('#level');
+              p++;
+              if(p%4 === 0){
+                  n++;
+              }
+              oscore.innerHTML = 'Point:' + '' + p ;
+
+              olevel.innerHTML = 'Level:'+''+ n ;
+              game();;
+          })  
+        });
+      }
+    </script>
+  </body>
+</html>
